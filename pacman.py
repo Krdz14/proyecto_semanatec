@@ -155,7 +155,7 @@ def move():
         if abs(pacman - point) < 20:
             return
 
-    turtle.ontimer(move, 100)
+    turtle.ontimer(move, 50)
 
 
 def change(x, y):
