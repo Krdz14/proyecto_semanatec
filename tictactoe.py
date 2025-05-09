@@ -8,41 +8,41 @@ Exercises
 4. How could you create a computer player?
 """
 
-from turtle import * #Imports all functions from the Turtle module for graphics
-
-from freegames import line #Imports the 'line' function from the Freegames module
+import turtle as t  # Import turtle with alias
+from freegames import line
 
 
 def grid():
     """Draw tic-tac-toe grid."""
-    #Draw the vertical lines
+    # Draw the vertical lines
     line(-67, 200, -67, -200)
     line(67, 200, 67, -200)
-    #Draw the horizontal lines
+    # Draw the horizontal lines
     line(-200, -67, 200, -67)
     line(-200, 67, 200, 67)
 
 
 def drawx(x, y):
     """Draw X player."""
-    color(purple)
-    pensize(5)
-    ## Draw the two lines of the X
+    t.color("purple")
+    t.pensize(5)
+    # Draw the two lines of the X
     line(x, y, x + 133, y + 133)
     line(x, y + 133, x + 133, y)
 
 
 def drawo(x, y):
     """Draw O player."""
-    up() # Lift the pen to move it without drawing
-    goto(x + 67, y + 5) # Move the pen to the specified coordinates
-    down() # Lower the pen to start drawing
-    circle(62) # Draw a circle with radius 62
+    t.up()  # Lift the pen to move it without drawing
+    t.goto(x + 67, y + 5)  # Move the pen to the specified coordinates
+    t.down()  # Lower the pen to start drawing
+    t.circle(62)  # Draw a circle with radius 62
 
 
 def floor(value):
     """Round value down to grid with square size 133."""
     return ((value + 200) // 133) * 133 - 200
+
 
 def check_win(board, player_symbol):
     """Check if the player has won."""
@@ -60,10 +60,9 @@ def check_win(board, player_symbol):
     return False
 
 
-
-state = {'player': 0} # The dictionary that maintains the game state (who the current player is)
+state = {'player': 0}
 board = [['' for _ in range(3)] for _ in range(3)]
-players = [drawx, drawo] # List of functions that draw the X's and O's, respectively
+players = [drawx, drawo]
 
 
 def tap(x, y):
@@ -85,32 +84,30 @@ def tap(x, y):
 
     # Save symbol to logic board
     board[row][col] = 'X' if player == 0 else 'O'
-    update()
+    t.update()
 
     # Check if there is a winner
     if check_win(board, 'X'):
         print("¡Jugador X gana!")
-        onscreenclick(None)  # Stop further clicks
+        t.onscreenclick(None)  # Stop further clicks
         return
     elif check_win(board, 'O'):
         print("¡Jugador O gana!")
-        onscreenclick(None)
+        t.onscreenclick(None)
         return
-    # Check tie
     elif all(cell != '' for row in board for cell in row):
         print("¡Empate!")
-        onscreenclick(None)
+        t.onscreenclick(None)
         return
 
     # Change shift
     state['player'] = not player
 
 
-
-setup(420, 420, 370, 0) # Set the Turtle window to 420x420 pixels
-hideturtle() # Hide the Turtle cursor
-tracer(False) # Disable Turtle movement to prevent it from automatically drawing
-grid() # Call the function to draw the grid
-update() # Refresh the screen to show the changes
-onscreenclick(tap) # Register the 'tap' function to run when the user clicks on the screen
-done() # Terminate program execution
+t.setup(420, 420, 370, 0)  # Set the Turtle window to 420x420 pixels
+t.hideturtle()  # Hide the Turtle cursor
+t.tracer(False)  # Disable Turtle movement to prevent it from auto drawing
+grid()  # Call the function to draw the grid
+t.update()  # Refresh the screen to show the changes
+t.onscreenclick(tap)  # Register the 'tap' function to user clicks
+t.done()  # Terminate program execution
