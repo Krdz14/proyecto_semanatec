@@ -10,7 +10,7 @@ Exercises
 """
 
 from random import choice
-from turtle import *
+import turtle
 
 from freegames import floor, vector
 
