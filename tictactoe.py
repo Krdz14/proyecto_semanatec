@@ -25,6 +25,8 @@ def grid():
 
 def drawx(x, y):
     """Draw X player."""
+    color(purple)
+    pensize(5)
     ## Draw the two lines of the X
     line(x, y, x + 133, y + 133)
     line(x, y + 133, x + 133, y)
