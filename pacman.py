@@ -6,7 +6,6 @@ Exercises
 2. Change the number of ghosts.
 3. Change where pacman starts.
 4. Make the ghosts faster/slower.
-5. Make the ghosts smarter.
 """
 
 from random import choice
@@ -92,7 +91,7 @@ def valid(point):
 def world():
     """Draw world using path."""
     turtle.bgcolor('black')
-    path.color('blue')
+    path.color('pink')
 
     for index in range(len(tiles)):
         tile = tiles[index]
