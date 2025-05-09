@@ -44,25 +44,67 @@ def floor(value):
     """Round value down to grid with square size 133."""
     return ((value + 200) // 133) * 133 - 200
 
+def check_win(board, player_symbol):
+    """Check if the player has won."""
+    # Review rows and columns
+    for i in range(3):
+        if all(cell == player_symbol for cell in board[i]):
+            return True
+        if all(row[i] == player_symbol for row in board):
+            return True
+    # Check diagonals
+    if all(board[i][i] == player_symbol for i in range(3)):
+        return True
+    if all(board[i][2 - i] == player_symbol for i in range(3)):
+        return True
+    return False
+
+
 
 state = {'player': 0} # The dictionary that maintains the game state (who the current player is)
+board = [['' for _ in range(3)] for _ in range(3)]
 players = [drawx, drawo] # List of functions that draw the X's and O's, respectively
 
 
 def tap(x, y):
-    """Draw X or O in tapped square."""
-    x = floor(x) # Rounds x coordinates to the nearest grid value
-    y = floor(y) # Rounds y coordinates to the nearest grid value
-    key = (x,y)
-    if key in board:
-        print("Occupied Box")
-        return 
-    player = state['player'] # Gets the current player from the state
-    draw = players[player] # Selects the player-based drawing function
-    draw(x, y) # Draws the shape (X or O) at the selected position
-    board[key] = player #Mark the box as occupied
-    update() # Refreshes the screen
-    state['player'] = not player # Switches to the next player
+    """Draw X or O on the touched square and check for a win or draw."""
+    x0 = floor(x)
+    y0 = floor(y)
+
+    # Convert graphic coordinates to board indices (row and column)
+    col = int((x0 + 200) // 133)
+    row = int((y0 + 200) // 133)
+
+    # Validate if the box is already occupied
+    if board[row][col] != '':
+        return  # Ignore if there is already something in that box
+
+    player = state['player']
+    draw = players[player]
+    draw(x0, y0)
+
+    # Save symbol to logic board
+    board[row][col] = 'X' if player == 0 else 'O'
+    update()
+
+    # Check if there is a winner
+    if check_win(board, 'X'):
+        print("¡Jugador X gana!")
+        onscreenclick(None)  # Stop further clicks
+        return
+    elif check_win(board, 'O'):
+        print("¡Jugador O gana!")
+        onscreenclick(None)
+        return
+    # Check tie
+    elif all(cell != '' for row in board for cell in row):
+        print("¡Empate!")
+        onscreenclick(None)
+        return
+
+    # Change shift
+    state['player'] = not player
+
 
 
 setup(420, 420, 370, 0) # Set the Turtle window to 420x420 pixels
