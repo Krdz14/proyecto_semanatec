@@ -53,9 +53,14 @@ def tap(x, y):
     """Draw X or O in tapped square."""
     x = floor(x) # Rounds x coordinates to the nearest grid value
     y = floor(y) # Rounds y coordinates to the nearest grid value
+    key = (x,y)
+    if key in board:
+        print("Occupied Box")
+        return 
     player = state['player'] # Gets the current player from the state
     draw = players[player] # Selects the player-based drawing function
     draw(x, y) # Draws the shape (X or O) at the selected position
+    board[key] = player #Mark the box as occupied
     update() # Refreshes the screen
     state['player'] = not player # Switches to the next player
 
