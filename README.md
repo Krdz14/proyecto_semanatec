@@ -25,17 +25,16 @@ Este proyecto es una versión modificada del juego Tic Tac Toe utilizando Python
 
 ## ¿Cómo ejecutar el juego?
 
-1. Asegúrate de tener Python instalado. Para verificar:
-   ```bash
+1. Entra a la terminal (cdm) y asegúrate de tener Python instalado. Para verificar:
    python --versión
 
-2. Desde la terminal (CDM), entrar a la carpeta del proyecto
+2. Desde la misma terminal (CDM), entrar a la carpeta del proyecto
    git clone https://github.com/Krdz14/proyecto_semanatec.git
 
 3. Ejecuta el archivo 
-   Python tictactoe.py
+   python tictactoe.py
 
-4.Adelante puedes jugar
+4. Adelante puedes jugar
 
 
 
