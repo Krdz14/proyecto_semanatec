@@ -30,7 +30,7 @@ Este proyecto es una versión modificada del juego Tic Tac Toe utilizando Python
    python --versión
 
 2. Desde la terminal (CDM), entrar a la carpeta del proyecto
-   cd https://github.com/Krdz14/proyecto_semanatec.git
+   git clone https://github.com/Krdz14/proyecto_semanatec.git
 
 3. Ejecuta el archivo 
    Python tictactoe.py
